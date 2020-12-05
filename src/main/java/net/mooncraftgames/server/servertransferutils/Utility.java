@@ -3,6 +3,7 @@ package net.mooncraftgames.server.servertransferutils;
 import cn.nukkit.Player;
 import cn.nukkit.network.protocol.TransferPacket;
 import cn.nukkit.utils.TextFormat;
+import net.mooncraftgames.server.servertransferutils.types.Destination;
 
 public class Utility {
 
@@ -16,12 +17,11 @@ public class Utility {
         return String.format("%s%s%s %s%s>> %s%s%s", topicColour, TextFormat.BOLD, topic, TextFormat.DARK_GRAY, TextFormat.BOLD, TextFormat.RESET, defaultTextColour, text);
     }
 
-    public static void transfer(Player player, String address, Integer port){
-        int realPort = port == null ? 19132 : port;
+    public static void transfer(Player player, Destination destination){
 
         TransferPacket packet = new TransferPacket();
-        packet.address = address;
-        packet.port = realPort;
+        packet.address = destination.getAddress();
+        packet.port = destination.getPort();
         player.directDataPacket(packet);
     }
 
