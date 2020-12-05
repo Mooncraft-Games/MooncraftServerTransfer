@@ -2,6 +2,8 @@ package net.mooncraftgames.server.servertransferutils.types;
 
 import net.mooncraftgames.server.servertransferutils.ServerTransferConstants;
 
+import java.util.regex.Pattern;
+
 public final class Destination {
 
     private String address;
@@ -21,7 +23,22 @@ public final class Destination {
         if(address == null) {
             resetAddress();
         } else {
-            this.address = address;
+            String addr;
+
+            if(address.contains(":")){
+                String[] split = address.split(Pattern.quote(":"));
+                addr = split[0];
+
+                try {
+                    String portString = split[1];
+                    this.setPort(Integer.parseInt(portString));
+                } catch (Exception ignored){ }
+
+            } else {
+                 addr = address;
+            }
+
+            this.address = addr;
         }
     }
 
