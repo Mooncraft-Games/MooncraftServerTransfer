@@ -1,0 +1,10 @@
+name: ServerTransferUtilities
+main: net.mooncraftgames.server.servertransferutils.ServerTransferUtils
+load: STARTUP
+version: "1.0.0"
+api: ["1.0.9"]
+prefix: "servertransfer"
+
+author: "CG360 @ Mooncraft Games"
+description: "A small library that adds a server transfer command!"
+depend: []
