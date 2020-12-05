@@ -13,9 +13,15 @@ import net.mooncraftgames.server.servertransferutils.types.Destination;
 public class CommandServerTransfer extends PluginCommand<ServerTransferUtils> {
 
     public CommandServerTransfer() {
-        super("servertransfer", ServerTransferUtils.get());
+        super("transferserver", ServerTransferUtils.get());
         this.setDescription("Takes people to different servers.");
-        this.setUsage("/servertransfer <string: IP> <int: port>");
+        this.setUsage("/transferserver <string: IP> <int: port>");
+
+        this.setAliases(new String[]{
+                "transferserver",
+                "servertransfer",
+                "gotoserver",
+        });
 
         this.commandParameters.clear();
         this.commandParameters.put("default", new CommandParameter[]{
