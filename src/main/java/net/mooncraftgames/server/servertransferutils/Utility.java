@@ -5,9 +5,9 @@ import cn.nukkit.network.protocol.TransferPacket;
 import cn.nukkit.utils.TextFormat;
 import net.mooncraftgames.server.servertransferutils.types.Destination;
 
-public class Utility {
+import static net.mooncraftgames.server.servertransferutils.ServerTransferConstants.DEFAULT_TEXT_COLOUR;
 
-    public static final TextFormat DEFAULT_TEXT_COLOUR = TextFormat.GRAY;
+public class Utility {
 
     public static String generateServerMessage(String topic, TextFormat topicColour, String text){
         return generateServerMessage(topic, topicColour, text, DEFAULT_TEXT_COLOUR);
