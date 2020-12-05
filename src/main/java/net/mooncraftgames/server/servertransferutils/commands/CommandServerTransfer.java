@@ -5,14 +5,12 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.PluginCommand;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.network.protocol.TransferPacket;
 import cn.nukkit.utils.TextFormat;
 import net.mooncraftgames.server.servertransferutils.ServerTransferUtils;
 import net.mooncraftgames.server.servertransferutils.Utility;
+import net.mooncraftgames.server.servertransferutils.types.Destination;
 
 public class CommandServerTransfer extends PluginCommand<ServerTransferUtils> {
-
-    public static final int DEFAULT_PORT = 19132;
 
     public CommandServerTransfer() {
         super("servertransfer", ServerTransferUtils.get());
@@ -21,7 +19,8 @@ public class CommandServerTransfer extends PluginCommand<ServerTransferUtils> {
 
         this.commandParameters.clear();
         this.commandParameters.put("default", new CommandParameter[]{
-                CommandParameter.newType("sessionid", CommandParamType.STRING)
+                CommandParameter.newType("address", CommandParamType.STRING),
+                CommandParameter.newType("port", CommandParamType.INT)
         });
     }
 
@@ -38,24 +37,22 @@ public class CommandServerTransfer extends PluginCommand<ServerTransferUtils> {
         if(args.length < 1){
             sender.sendMessage(Utility.generateServerMessage("ERROR", TextFormat.DARK_RED, "Missing Arguments: "+getUsage(), TextFormat.RED));
         } else {
-            String address = args[0];
-            int port;
+            Destination dest = new Destination();
+            dest.setAddress(args[0]);
 
             // Get port. Only use default if parameter is not present.
             if(args.length > 1) {
                 try {
                     String portString = args[1];
-                    port = Integer.parseInt(portString);
+                    dest.setPort(Integer.parseInt(portString));
                 } catch (Exception err) {
                     sender.sendMessage(Utility.generateServerMessage("ERROR", TextFormat.DARK_RED, "Argument 'port' was not of type 'int': " + getUsage(), TextFormat.RED));
                     return true;
                 }
-            } else {
-                port = DEFAULT_PORT;
             }
 
             sender.sendMessage(Utility.generateServerMessage("TRANSFER", TextFormat.BLUE, "Preparing to server transfer...", TextFormat.GRAY));
-            Utility.transfer(player, address, port);
+            Utility.transfer(player, dest);
             sender.sendMessage(Utility.generateServerMessage("TRANSFER", TextFormat.BLUE, "Well if you're still here, something went wrong. :(", TextFormat.GRAY));
         }
 
