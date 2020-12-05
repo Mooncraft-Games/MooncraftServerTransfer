@@ -55,10 +55,7 @@ public class CommandServerTransfer extends PluginCommand<ServerTransferUtils> {
             }
 
             sender.sendMessage(Utility.generateServerMessage("TRANSFER", TextFormat.BLUE, "Preparing to server transfer...", TextFormat.GRAY));
-            TransferPacket packet = new TransferPacket();
-            packet.address = address;
-            packet.port = port;
-            player.directDataPacket(packet);
+            Utility.transfer(player, address, port);
             sender.sendMessage(Utility.generateServerMessage("TRANSFER", TextFormat.BLUE, "Well if you're still here, something went wrong. :(", TextFormat.GRAY));
         }
 
