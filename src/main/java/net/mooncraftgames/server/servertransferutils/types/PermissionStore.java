@@ -23,8 +23,10 @@ public class PermissionStore {
 
     /** @return this for chaining. */
     public PermissionStore addRequiredPermission(String permission){
-        blocked.remove(permission);
-        required.add(permission);
+        if(permission != null) {
+            blocked.remove(permission);
+            required.add(permission);
+        }
         return this;
     }
 
@@ -36,8 +38,10 @@ public class PermissionStore {
 
     /** @return this for chaining. */
     public PermissionStore addBlockedPermission(String permission){
-        required.remove(permission);
-        blocked.add(permission);
+        if(permission != null) {
+            required.remove(permission);
+            blocked.add(permission);
+        }
         return this;
     }
 
