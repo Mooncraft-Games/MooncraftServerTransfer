@@ -10,6 +10,12 @@ import net.mooncraftgames.server.servertransferutils.ServerTransferUtils;
 import net.mooncraftgames.server.servertransferutils.Utility;
 import net.mooncraftgames.server.servertransferutils.types.Destination;
 
+/**
+ * A command that can transfer a player to another server based off an
+ * address and a port.
+ * @see Destination
+ * @author CG360
+ */
 public class CommandServerTransfer extends PluginCommand<ServerTransferUtils> {
 
     public CommandServerTransfer() {

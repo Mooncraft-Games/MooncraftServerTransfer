@@ -4,6 +4,11 @@ import net.mooncraftgames.server.servertransferutils.ServerTransferConstants;
 
 import java.util.regex.Pattern;
 
+/**
+ * A link between a destination and a port.
+ * Can separate an address:port combination.
+ * @author CG360
+ */
 public final class Destination {
 
     private String address;

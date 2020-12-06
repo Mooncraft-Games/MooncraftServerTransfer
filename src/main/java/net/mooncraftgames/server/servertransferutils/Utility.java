@@ -7,6 +7,12 @@ import net.mooncraftgames.server.servertransferutils.types.Destination;
 
 import static net.mooncraftgames.server.servertransferutils.ServerTransferConstants.DEFAULT_TEXT_COLOUR;
 
+
+//TODO: Make a core library with all common methods across all projects.
+/**
+ * A Utility class which includes a few methods used across the project.
+ * @author CG360
+ */
 public class Utility {
 
     public static String generateServerMessage(String topic, TextFormat topicColour, String text){

@@ -5,6 +5,12 @@ import cn.nukkit.Player;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * An object that stores permissions.
+ * Required = Player MUST have all listed permissions.
+ * Blocked = Players MUST NOT have ANY listed permissions.
+ * @author CG360
+ */
 public class PermissionStore {
 
     private PermissionStore parent;

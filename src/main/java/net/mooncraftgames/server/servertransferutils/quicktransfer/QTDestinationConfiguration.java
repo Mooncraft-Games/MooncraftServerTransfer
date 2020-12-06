@@ -8,6 +8,10 @@ import net.mooncraftgames.server.servertransferutils.types.PermissionStore;
 
 import java.io.File;
 
+/**
+ * Handles configuration specifically for the QuickTransfer feature.
+ * @author CG360
+ */
 public abstract class QTDestinationConfiguration {
 
     private File configLocation;
