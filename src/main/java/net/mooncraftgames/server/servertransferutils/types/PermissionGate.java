@@ -24,6 +24,46 @@ public class PermissionGate {
 
 
 
+    /** @return this for chaining. */
+    public PermissionGate addRequiredPermission(String permission){
+        blocked.remove(permission);
+        required.add(permission);
+        return this;
+    }
+
+    /** @return this for chaining. */
+    public PermissionGate removeRequiredPermission(String permission){
+        required.remove(permission);
+        return this;
+    }
+
+    /** @return this for chaining. */
+    public PermissionGate addBlockedPermission(String permission){
+        required.remove(permission);
+        blocked.add(permission);
+        return this;
+    }
+
+    /** @return this for chaining. */
+    public PermissionGate removeBlockedPermission(String permission){
+        blocked.remove(permission);
+        return this;
+    }
+
+    /** @return this for chaining. */
+    public PermissionGate clearRequiredLocalPermissions(){
+        required = new ArrayList<>();
+        return this;
+    }
+
+    /** @return this for chaining. */
+    public PermissionGate clearBlockedLocalPermissions(){
+        blocked = new ArrayList<>();
+        return this;
+    }
+
+
+
     public boolean hasParent(){ return getParent().isPresent(); }
     public boolean checkPass(Player player){
         ArrayList<String> allowed = getRequired();
@@ -48,11 +88,12 @@ public class PermissionGate {
         if(parentOptional.isPresent()){
 
             ArrayList<String> perms = getLocalRequired();
-            perms.addAll(parentOptional.get().getRequired());
+            for(String str: parentOptional.get().getRequired()){
+                if(!perms.contains(str)) perms.add(str); // Avoid dupes.
+            }
             return perms;
 
         } else return getLocalRequired();
-
     }
 
     public ArrayList<String> getBlocked() {
@@ -60,10 +101,11 @@ public class PermissionGate {
         if(parentOptional.isPresent()){
 
             ArrayList<String> perms = getLocalBlocked();
-            perms.addAll(parentOptional.get().getBlocked());
+            for(String str: parentOptional.get().getBlocked()){
+                if(!perms.contains(str)) perms.add(str); // Avoid dupes.
+            }
             return perms;
 
         } else return getLocalBlocked();
     }
-
 }
