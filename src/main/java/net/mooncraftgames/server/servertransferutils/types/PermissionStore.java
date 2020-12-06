@@ -1,22 +1,19 @@
 package net.mooncraftgames.server.servertransferutils.types;
 
 import cn.nukkit.Player;
-import net.mooncraftgames.server.servertransferutils.ServerTransferConstants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
-public class PermissionGate {
+public class PermissionStore {
 
-    private PermissionGate parent;
+    private PermissionStore parent;
 
     private ArrayList<String> required;
     private ArrayList<String> blocked;
 
-    public PermissionGate(){ this(null); }
-    public PermissionGate(PermissionGate parent){
+    public PermissionStore(){ this(null); }
+    public PermissionStore(PermissionStore parent){
         this.parent = parent;
         this.required = new ArrayList<>();
         this.blocked = new ArrayList<>();
@@ -25,39 +22,39 @@ public class PermissionGate {
 
 
     /** @return this for chaining. */
-    public PermissionGate addRequiredPermission(String permission){
+    public PermissionStore addRequiredPermission(String permission){
         blocked.remove(permission);
         required.add(permission);
         return this;
     }
 
     /** @return this for chaining. */
-    public PermissionGate removeRequiredPermission(String permission){
+    public PermissionStore removeRequiredPermission(String permission){
         required.remove(permission);
         return this;
     }
 
     /** @return this for chaining. */
-    public PermissionGate addBlockedPermission(String permission){
+    public PermissionStore addBlockedPermission(String permission){
         required.remove(permission);
         blocked.add(permission);
         return this;
     }
 
     /** @return this for chaining. */
-    public PermissionGate removeBlockedPermission(String permission){
+    public PermissionStore removeBlockedPermission(String permission){
         blocked.remove(permission);
         return this;
     }
 
     /** @return this for chaining. */
-    public PermissionGate clearRequiredLocalPermissions(){
+    public PermissionStore clearRequiredLocalPermissions(){
         required = new ArrayList<>();
         return this;
     }
 
     /** @return this for chaining. */
-    public PermissionGate clearBlockedLocalPermissions(){
+    public PermissionStore clearBlockedLocalPermissions(){
         blocked = new ArrayList<>();
         return this;
     }
@@ -77,14 +74,14 @@ public class PermissionGate {
 
 
 
-    public Optional<PermissionGate> getParent() { return Optional.ofNullable(parent); }
+    public Optional<PermissionStore> getParent() { return Optional.ofNullable(parent); }
     public ArrayList<String> getLocalRequired() { return new ArrayList<>(required); }
     public ArrayList<String> getLocalBlocked() { return new ArrayList<>(blocked); }
 
 
 
     public ArrayList<String> getRequired() {
-        Optional<PermissionGate> parentOptional = getParent();
+        Optional<PermissionStore> parentOptional = getParent();
         if(parentOptional.isPresent()){
 
             ArrayList<String> perms = getLocalRequired();
@@ -97,7 +94,7 @@ public class PermissionGate {
     }
 
     public ArrayList<String> getBlocked() {
-        Optional<PermissionGate> parentOptional = getParent();
+        Optional<PermissionStore> parentOptional = getParent();
         if(parentOptional.isPresent()){
 
             ArrayList<String> perms = getLocalBlocked();
