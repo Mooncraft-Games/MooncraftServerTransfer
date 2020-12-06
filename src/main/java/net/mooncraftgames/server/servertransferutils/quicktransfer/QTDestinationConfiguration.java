@@ -1,13 +1,12 @@
-package net.mooncraftgames.server.servertransferutils.warpspeed;
+package net.mooncraftgames.server.servertransferutils.quicktransfer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public abstract class WarpspeedDestinationConfiguration {
+public abstract class QTDestinationConfiguration {
 
     private ArrayList<String> loadedConfigs;
 
-    public WarpspeedDestinationConfiguration() {
+    public QTDestinationConfiguration() {
         this.loadedConfigs = new ArrayList<>();
     }
 
